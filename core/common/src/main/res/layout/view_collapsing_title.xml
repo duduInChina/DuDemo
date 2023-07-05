@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- elevation 取消阴影  -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:collapsedTitleGravity="center"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/activity_horizontal_margin"
+            app:expandedTitleTextAppearance="@style/MyToolBarExpandedTitle"
+            app:collapsedTitleTextAppearance="@style/MyToolBarCollapsedTitle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <!--app:collapsedTitleTextAppearance="@style/ToolbarTitle"-->
+            <!-- 使用 https://mp.weixin.qq.com/s?__biz=MzA5MzI3NjE2MA==&mid=2650243655&idx=1&sn=abfbb14baced8c9aba43e461af7e4d17&chksm=88637328bf14fa3e76843e75af741007f308dfa977dcbd95207b9ddeada5da4f084551759113&scene=38#wechat_redirect-->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                tools:title="Test">
+
+                <!--        顶位view，保证标题居中  78dp      -->
+                <View
+                    android:id="@+id/toolbarLeftView"
+                    android:layout_width="78dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="end" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:id="@+id/layoutBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

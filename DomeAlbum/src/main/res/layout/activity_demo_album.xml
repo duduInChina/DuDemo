@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sysAlbumCardView"
+        style="@style/MyMainCardViewFocused"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="系统相册"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_medium" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sysAlbumImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:src="@drawable/icon_image_primary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sysCameraCardView"
+        style="@style/MyMainCardViewFocused"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="系统相机"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_medium" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sysCameraImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:src="@drawable/icon_image_primary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sysCropCardView"
+        style="@style/MyMainCardViewFocused"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="系统裁剪图片"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_medium" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sysCropImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:src="@drawable/icon_image_primary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/myAlbumCardView"
+        style="@style/MyMainCardViewFocused"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="自定义图库"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_medium" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/myAlbumImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="end"
+            android:src="@drawable/icon_image_primary" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

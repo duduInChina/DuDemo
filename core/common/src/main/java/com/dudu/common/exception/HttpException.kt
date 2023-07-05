@@ -1,0 +1,8 @@
+package com.dudu.common.exception
+
+/**
+ * 功能介绍
+ * Created by Dzc on 2023/6/26.
+ */
+class HttpException(val code: Int, message: String) : RuntimeException(message) {
+}

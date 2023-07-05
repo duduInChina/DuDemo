@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--    app:strokeColor="@color/color_23d41e" //边框的颜色
+    app:strokeWidth="5dp" //边框的宽度
+    app:cardElevation="8dp" //阴影大小
+    app:cardCornerRadius="8dp"//角度大小
+    app:cardBackgroundColor="@color/white" // 设置了就会有点击效果
+    app:rippleColor="@color/color_23d41e"// 自定义点击波纹效果的颜色
+    android:clickable="true" // 点击事件拦截到cardView，CardView完成监听点击事件
+    -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardViewFocused"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:rippleColor="@color/clickColorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium"
+                tools:text="第一行代码" />
+
+            <TextView
+                android:id="@+id/contentTitleView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small"
+                tools:text="content"
+                />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+
+

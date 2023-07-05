@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!-- 继承BaseActivity,底层都为该界面 -->
+
+    <!--  statusbar 占位view，按需显示  -->
+    <ViewStub
+        android:id="@+id/statusBarStub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/view_status_bar"/>
+
+    <!-- 增加标题布局，会把layout中的根布局代替  -->
+    <ViewStub
+        android:id="@+id/titleStub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inflatedId="@id/titleStub"
+        android:layout="@layout/view_default_title"/>
+
+    <FrameLayout
+        android:id="@+id/layoutBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!--   增加加载布局     -->
+
+        <ViewStub
+            android:id="@+id/loadingStub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/layout_loading"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>

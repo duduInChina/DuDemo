@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlinx-serialization'
+}
+apply from: '../../dependencies.gradle'
+android {
+    namespace 'com.dudu.network'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 33
+
+        // 启动http执行日志
+        buildConfigField("Boolean", "NETWORK_DEBUG", "false")
+        // 开启okhttp profile插件，需开启debug
+        buildConfigField("Boolean", "NETWORK_PROFILE", "true")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    // 启用 buildConfigField
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+
+    api 'com.squareup.retrofit2:retrofit:2.9.0' // 标识为api为引入该module，可共用到该包api, 默认引入okHttp 3.14.9
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'// 解析效率高，https://blog.jetbrains.com/zh-hans/kotlin/2021/05/kotlinx-serialization-1-2-released/
+
+    implementation project(path: ':core:common')
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.11' // okhttp4 已经由kotlin开发协程，当前引入该版本
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'// 日志
+    implementation 'com.localebro:okhttpprofiler:1.0.8'// okhttp profiler请求插件，可以通过idea查看请求状态
+
+
+
+}

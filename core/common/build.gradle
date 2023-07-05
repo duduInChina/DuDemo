@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../../dependencies.gradle'
+android {
+    namespace 'com.dudu.common'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+//    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'   // viewmodel
+    // 初始项目已默认导入 2.5.1 lifecycle-common lifecycle-livedata-core lifecycle-viewmodel lifecycle-runtime lifecycle-viewmodel-savestate
+    // Android KTX 扩展库，https://developer.android.google.cn/kotlin/ktx?hl=zh-cn
+    // 扩展 viewModelScope 功能，用于在后台线程中发出网络请求。该库会处理所有设置和相应的范围清除
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    // 可以使用 lambda 来简化 Fragment 事务,viewModels 和 activityViewModels 属性委托在一行中绑定到 ViewModel
+    api 'androidx.fragment:fragment-ktx:1.5.7'
+    api 'androidx.lifecycle:lifecycle-common:2.5.1'
+    // livedata，asLivedata() 方法加入
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    // app启动时通过Contentrovider，初始化其他业务，优化启动流程 https://juejin.cn/post/7060349714205999140
+    api 'androidx.startup:startup-runtime:1.1.1'
+    api 'com.guolindev.permissionx:permissionx:1.7.1'
+    // 注解，class.annotations 当前默认kotlin-stdlib 为1.8.10
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.10'
+
+}

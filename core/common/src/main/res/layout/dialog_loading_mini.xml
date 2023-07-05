@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_redius_black"
+    android:gravity="center"
+    android:minHeight="100dp"
+    android:minWidth="100dp"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <com.dudu.common.widget.MiniLoadingView
+        android:id="@+id/miniLoadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:mlv_loading_view_color="@color/white"
+        app:mlv_loading_view_size="25dp"/>
+
+    <TextView
+        android:id="@+id/tipView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数据加载中..."
+        android:textColor="@color/white"
+        android:textSize="14sp"/>
+
+</LinearLayout>

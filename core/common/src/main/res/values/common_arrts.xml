@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  自定义style的值， 默认属性：view指定defStyleAttr R.attr.MiniLoadingStyle，然后在style中定义默认属性值 -->
+    <attr name="MiniLoadingStyle" format="reference" />
+
+    <!-- MiniLoadingView的自定义属性 -->
+    <!-- xmls使用 xmlns:XXX="http://schemas.android.com/apk/res-auto XXX:apiKey="""   -->
+    <!-- 代码使用 R.styleable.MiniLoadingView_mlv_loading_view_color   -->
+    <declare-styleable name="MiniLoadingView">
+        <!--    控件颜色    -->
+        <attr name="mlv_loading_view_color" format="color" />
+        <!--    控件大小    -->
+        <attr name="mlv_loading_view_size" format="dimension" />
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../../dependencies.gradle'
+android {
+    namespace 'com.dudu.camera'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 33
+
+        // 配置文件参数
+        manifestPlaceholders = [cameraAuthoritiesSuffix: ".file.camera.fileProvider",
+                                cameraFileSuffix       : "camera"]
+
+        // 全局配置参数
+        buildConfigField("String", "CAMERA_AUTHORITIES_SUFFIX", "\"${manifestPlaceholders['cameraAuthoritiesSuffix']}\"")
+        // 用于获取文件Uri
+        buildConfigField("String", "CAMERA_FILE_SUFFIX", "\"${manifestPlaceholders['cameraFileSuffix']}\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    // 启用 buildConfigField
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    implementation project(path: ':core:common')
+}
+
+task generateGlobalCameraXml {
+    doLast { // TODO: 根据参数更新xml当前每次都会执行，需优化
+        println "generateGlobalCameraXml start"
+        def cameraFileSuffix = android.defaultConfig.manifestPlaceholders['cameraFileSuffix']
+        println "generateGlobalCameraXml：" + cameraFileSuffix
+        //        def downloadFileSuffix = android.defaultConfig.buildConfigFields['DOWNLOAD_FILE_SUFFIX'].value
+        def xmlContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<paths>\n" +
+                "    <cache-path name=\"cameraCachePath\" path=\"${cameraFileSuffix}\"/>\n" +
+                "    <external-cache-path name=\"cameraExternalCachePath\" path=\"${cameraFileSuffix}\"/>\n" +
+                "</paths>"
+        def outputFile = file("${projectDir}/src/main/res/xml/camera_file_paths.xml")
+        outputFile.write(xmlContent)
+        println "generateGlobalCameraXml end"
+    }
+}
+
+// 在 assemble 任务之前执行 generateGlobalCameraXml 任务
+//assemble.dependsOn(generateGlobalCameraXml)

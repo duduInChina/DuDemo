@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+
+    id 'kotlin-kapt'// room插件
+}
+apply from: '../../dependencies.gradle'
+android {
+    namespace 'com.dudu.download'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 33
+
+        // 配置文件参数
+        manifestPlaceholders = [downloadAuthoritiesSuffix: ".file.download.fileProvider",
+                                downloadFileSuffix       : "download"]
+
+        // 全局配置参数
+        buildConfigField("String", "DOWNLOAD_AUTHORITIES_SUFFIX", "\"${manifestPlaceholders['downloadAuthoritiesSuffix']}\"")
+        // 用于获取文件Uri
+        buildConfigField("String", "DOWNLOAD_FILE_SUFFIX", "\"${manifestPlaceholders['downloadFileSuffix']}\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    // 启用 buildConfigField
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+    api project(path: ':core:network')
+    // 主要引入Application context
+    implementation project(path: ':core:common')
+    implementation 'androidx.room:room-ktx:2.5.2'
+    kapt "androidx.room:room-compiler:2.5.2"
+}
+
+
+task generateGlobalDownloadXml {
+    doLast { // TODO: 根据参数更新xml当前每次都会执行，需优化
+        println "generateGlobalDownloadXml start"
+        def downloadFileSuffix = android.defaultConfig.manifestPlaceholders['downloadFileSuffix']
+        println "generateGlobalDownloadXml：" + downloadFileSuffix
+    //        def downloadFileSuffix = android.defaultConfig.buildConfigFields['DOWNLOAD_FILE_SUFFIX'].value
+        def xmlContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<paths>\n" +
+                "    <cache-path name=\"downloadCachePath\" path=\"${downloadFileSuffix}\"/>\n" +
+                "    <external-cache-path name=\"downloadExternalCachePath\" path=\"${downloadFileSuffix}\"/>\n" +
+                "</paths>"
+        def outputFile = file("${projectDir}/src/main/res/xml/download_file_paths.xml")
+        outputFile.write(xmlContent)
+        println "generateGlobalDownloadXml end"
+    }
+}
+
+// 在 assemble 任务之前执行 generateGlobalConfigXml 任务
+//assemble.dependsOn(generateGlobalDownloadXml)

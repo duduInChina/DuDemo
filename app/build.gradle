@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../dependencies.gradle' // 导入统一配置
+
+android {
+    namespace 'com.dudemo'
+    compileSdk 33  // 指定android 13 sdk编译
+
+    defaultConfig {
+        applicationId "com.dudemo"
+        minSdk 26          // 最低兼容8.0
+        targetSdk 33       // 表示已经在Android 13 中已经做过充分测试
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+
+    implementation project(path: ':core:common')
+    implementation project(path: ':Weather')
+
+    // Android 12 提供了启动画面的API, 该库为向后兼容库，参考：https://developer.android.google.cn/guide/topics/ui/splash-screen/migrate?hl=zh-cn
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+    implementation project(path: ':Download')
+    implementation project(path: ':DomeAlbum')
+
+
+}

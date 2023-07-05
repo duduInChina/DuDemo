@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  标记统一大小  -->
+
+    <!--  组件距离手机边距，默认大小，左右  -->
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <!--  组件间的默认上下边距 -->
+    <dimen name="activity_vertical_margin">15dp</dimen>
+
+    <!--  字体默认大中小  -->
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+
+</resources>

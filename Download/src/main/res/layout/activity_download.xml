@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardView">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="注：\n忽略已下载文件：删除已存在文件重新下载，否则断点续传\n启用前台Service：app在后台时长期保持下载，后台手动清理app则杀死服务"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/text_small"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apk下载"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+            <!--
+            https://blog.csdn.net/BHFDHHD/article/details/113870381
+            Flow管理的view 自身可以不设置layout_constraintStart_toEndOf 等位置-->
+            <!--需要width="0dp" app:layout_constraintWidth_default="wrap"-->
+            <!--如果是Textview最好设置 android:singleLine="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;       //引用的id（内部的view的id）-->
+            <!--    app:constraint_referenced_ids="tv_type,tv_online_state,tv_switch_state"-->
+            <!--    //chain或者aligned，chain：链形式，依次挨着排，aligned会两端对齐-->
+            <!--    app:flow_wrapMode="chain"-->
+            <!--    //首行的对齐方式，packed:靠最左侧挨着排，水平间隔：horizontalGap生效，-->
+            <!--    // spread：分散对齐，两端不贴边。spread_inside：分散对齐，两头贴边-->
+            <!--    app:flow_firstHorizontalStyle="packed"-->
+            <!--    //最后一行的对齐方式，其他属性参考firstHorizontalStyle-->
+            <!--    app:flow_lastHorizontalStyle="packed"-->
+            <!--    // 全局水平bias，为0时，每行都贴左边，可解决中间行单独占一行时，不贴最左侧的问题-->
+            <!--    app:flow_horizontalBias="0"-->
+            <!--    // 第一行水平bias，为0时，贴最左边-->
+            <!--    app:flow_firstHorizontalBias="0"-->
+            <!--    // 最后一行水平bias，为0时，贴最左边-->
+            <!--    app:flow_lastHorizontalBias="0"-->
+            <!--    // 控件水平方向上的间隔-->
+            <!--    app:flow_horizontalGap="10dp"-->
+            <!--    // 行间隔-->
+            <!--    app:flow_verticalGap="8dp" &ndash;&gt;-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/apkIgnore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="忽略已下载文件" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/apkAutoInstall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="自动安装" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/apkNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="下载通知" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/apkService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="启用前台Service" />
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="apkIgnore,apkAutoInstall,apkNotification,apkService"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:flow_wrapMode="chain"
+                    app:flow_horizontalStyle="packed"
+                    app:flow_horizontalBias="0"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/apkSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0M"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small"/>
+
+            <ProgressBar
+                android:id="@+id/apkProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/apkDownloadBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="2dp"
+                android:text="下载"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/textColorPrimary" />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="多任务下载"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/taskIgnore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="忽略已下载文件" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/taskNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="下载通知" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/taskService"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="启用前台Service" />
+
+                <androidx.constraintlayout.helper.widget.Flow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="taskIgnore,taskNotification,taskService"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:flow_wrapMode="chain"
+                    app:flow_horizontalStyle="packed"
+                    app:flow_horizontalBias="0"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addTaskEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:inputType="text"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addTaskBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="2dp"
+                    android:text="添加下载"
+                    android:textColor="@color/textColorPrimary" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/autoAddTaskBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:text="自动添加任务"
+                android:textColor="@color/textColorPrimary" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        tools:listitem="@layout/item_download" />
+
+</LinearLayout>

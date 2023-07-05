@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CommonDialog" parent="@android:style/Theme.Dialog">
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否漂现在activity上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+        <item name="android:windowBackground">@color/transparency</item>
+    </style>
+
+    <!--自定义弹窗样式-->
+    <style name="CommonDialog.Custom">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">@color/transparency</item>
+        <!-- 去除黑色边框的关键设置项 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+
+    <!--自定义弹窗样式-->
+    <style name="CommonDialog.Custom.MiniLoading">
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0</item>
+    </style>
+
+    <!--  标题栏  -->
+    <!--  ToolBar取消阴影暂时没用  -->
+    <style name="MyToolBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--   隐藏阴影AppBarLayout     -->
+        <item name="elevation">0dp</item>
+    </style>
+    <!--  ToolBar展开时样式  -->
+    <style name="MyToolBarExpandedTitle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <!--  ToolBar闭环时样式  -->
+    <style name="MyToolBarCollapsedTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+<!--        <item name="android:textColor">#000000</item>-->
+<!--        <item name="android:textSize">18sp</item>-->
+<!--        <item name="android:textStyle">normal</item>-->
+    </style>
+
+    <!--  默认cardView属性  -->
+    <style name="MyMainCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="contentPadding">15dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    <!--  默认cardView点击效果，默认点击拦截  -->
+    <style name="MyMainCardViewFocused" parent="MyMainCardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="rippleColor">@color/clickColorPrimary</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+</resources>
