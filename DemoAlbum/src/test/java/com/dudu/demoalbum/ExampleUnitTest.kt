@@ -1,4 +1,4 @@
-package com.dudu.domealbum
+package com.dudu.demoalbum
 
 import org.junit.Test
 

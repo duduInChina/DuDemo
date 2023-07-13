@@ -8,7 +8,7 @@ import com.dudemo.databinding.ActivityMainBinding
 import com.dudu.common.base.activity.BaseActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
-import com.dudu.domealbum.DomeAlbumActivity
+import com.dudu.demoalbum.DemoAlbumActivity
 import com.dudu.download.DownloadActivity
 import com.dudu.weather.WeatherMainActivity
 
@@ -75,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             • registerForActivityResult：扩展封装界面回调方式，处理回调更简洁
             • ContentResolver：媒体数据库查询，flow数据流方式返回
             """.trimIndent(),
-                Intent(this, DomeAlbumActivity::class.java)
+                Intent(this, DemoAlbumActivity::class.java)
             )
         )
     }

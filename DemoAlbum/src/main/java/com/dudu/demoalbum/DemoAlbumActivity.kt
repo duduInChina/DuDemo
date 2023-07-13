@@ -1,12 +1,10 @@
-package com.dudu.domealbum
+package com.dudu.demoalbum
 
 import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
-import coil.load
 import com.dudu.album.AlbumActivity
 import com.dudu.album.AlbumConstant
 import com.dudu.album.util.AlbumUtil
@@ -16,7 +14,7 @@ import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
 import com.dudu.common.base.view.ImageLoader
 import com.dudu.common.ext.registerResult
-import com.dudu.domealbum.databinding.ActivityDemoAlbumBinding
+import com.dudu.demoalbum.databinding.ActivityDemoAlbumBinding
 import com.dudu.imageloader.CoilImageLoader
 import com.permissionx.guolindev.PermissionX
 
@@ -27,7 +25,7 @@ import com.permissionx.guolindev.PermissionX
  * Created by Dzc on 2023/7/2.
  */
 @Title(title = "相册", titleType = TitleType.COLL)
-class DomeAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
+class DemoAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
 
     private val imageLoader: ImageLoader = CoilImageLoader
 
@@ -85,12 +83,12 @@ class DomeAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
             }
 
             myAlbumCardView.setOnClickListener {
-                PermissionX.init(this@DomeAlbumActivity)
+                PermissionX.init(this@DemoAlbumActivity)
                     .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
                     .request { allGranted, _, _ ->
                         if (allGranted) {
                             AlbumConstant.imageLoader = CoilImageLoader
-                            myAlbumResult.launch(Intent(this@DomeAlbumActivity, AlbumActivity::class.java))
+                            myAlbumResult.launch(Intent(this@DemoAlbumActivity, AlbumActivity::class.java))
                         }
                     }
 

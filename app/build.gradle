@@ -46,7 +46,7 @@ dependencies {
     // Android 12 提供了启动画面的API, 该库为向后兼容库，参考：https://developer.android.google.cn/guide/topics/ui/splash-screen/migrate?hl=zh-cn
     implementation 'androidx.core:core-splashscreen:1.0.1'
     implementation project(path: ':Download')
-    implementation project(path: ':DomeAlbum')
+    implementation project(path: ':DemoAlbum')
 
 
 }

@@ -4,7 +4,7 @@ plugins {
 }
 apply from: '../dependencies.gradle'
 android {
-    namespace 'com.dudu.domealbum'
+    namespace 'com.dudu.demoalbum'
     compileSdk 33
 
     defaultConfig {
