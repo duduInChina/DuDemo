@@ -11,6 +11,14 @@ android {
         minSdk 26
         targetSdk 33
 
+        // 日志保存文件夹
+        buildConfigField("String", "LOG_DIR", "\"log\"")
+
+        ndk {
+            // xCrash 加入配置
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -30,6 +38,10 @@ android {
     }
     viewBinding {
         enabled = true
+    }
+    // 启用 buildConfigField
+    buildFeatures {
+        buildConfig true
     }
 }
 
@@ -51,4 +63,11 @@ dependencies {
     // 注解，class.annotations 当前默认kotlin-stdlib 为1.8.10
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.10'
 
+    // LogCat日志，格式风格
+    implementation 'com.orhanobut:logger:2.2.0'
+    // 日志，mmap内存映射文件（高性能，防丢失），内容加密压缩，分片
+//    implementation 'com.dianping.android.sdk:logan:1.2.4'
+    implementation 'com.tencent.mars:mars-xlog:1.2.5'
+    // 捕获java崩溃，native崩溃，ANR
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
 }

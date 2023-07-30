@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LogCat"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/textColorPrimary"
+                android:text="控制台日志，项目debug模式下才输出"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logD"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#6B865B"
+                        android:layout_margin="5dp"
+                        android:text="LogD"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logE"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#CD5C59"
+                        android:layout_margin="5dp"
+                        android:text="LogE"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logW"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#BBB438"
+                        android:layout_margin="5dp"
+                        android:text="LogW"/>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logV"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#000000"
+                        android:layout_margin="5dp"
+                        android:text="LogV"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/logI"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#325D77"
+                        android:layout_margin="5dp"
+                        android:text="LogI"/>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/MyMainCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XLog"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="埋点数据及状态日志，部署到生产环境，采用mars框架中的XLog，mmap内存映射文件，保证流畅防止日志丢失，日志压缩加密，作用于日志回捞（后台push回捞上传日志）\n LogE异常日志主动写入，DeBug下会输出日志"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/logX"
+                style="@style/MyItemCardViewFocused"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="LogX"
+                    android:textColor="#325D77"
+                    android:textSize="@dimen/text_medium" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/MyMainCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="XCrashLog"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="App发生Crash，异常日志Log记录到文件，下次打开App时日志文件提交到服务器\n Tread.setDefaultUncaughtExceptionHandler：java崩溃异常处理器 \n XCrash：捕获java崩溃，native崩溃和ANR崩溃 \n bugly：第三方sdk平台完成监控提交"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/javaCrash"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="JavaCrash"
+                        android:textColor="#325D77"
+                        android:textSize="@dimen/text_medium" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/nativeCrash"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="NativeCrash"
+                        android:textColor="#F44336"
+                        android:textSize="@dimen/text_medium" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/anrCrash"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="ANRCrash"
+                        android:textColor="#009688"
+                        android:textSize="@dimen/text_medium" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/sendCrash"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="#000000"
+                        android:layout_margin="5dp"
+                        android:text="SendCrash"/>
+
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/MyMainCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无埋点统计"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium" />
+
+            <TextView
+                android:id="@+id/trackerInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

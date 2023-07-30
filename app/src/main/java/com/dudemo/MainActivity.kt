@@ -10,6 +10,7 @@ import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
 import com.dudu.demoalbum.DemoAlbumActivity
 import com.dudu.download.DownloadActivity
+import com.dudu.log.LogActivity
 import com.dudu.weather.WeatherMainActivity
 
 
@@ -76,7 +77,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             • ContentResolver：媒体数据库查询，flow数据流方式返回
             """.trimIndent(),
                 Intent(this, DemoAlbumActivity::class.java)
-            )
+            ),
+
+            MainData("日志","""
+            • 调试日志：编码环节，debug模式下，仅控制台输出，封装Logger实现
+            • 数据及状态埋点日志：输出到控制台和文件归档，日志回捞（必要是推送push提交）需提交的日志文件，封装XLog实现
+            • 异常日志：Crash崩溃日志，输出到控制台和文件归档，下次打开app触发提交，封装XCrash实现
+            • 行为埋点日志：业务需求需记录的行为日志、曝光日志、点击日志，输出到控制台和数据库记录，根据时间段提交
+            """.trimIndent(),
+                Intent(this, LogActivity::class.java)
+            ),
         )
     }
 
@@ -100,6 +110,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 startActivity(it)
             }
         }
+
+        startActivity(Intent(this, LogActivity::class.java))
 
     }
 }

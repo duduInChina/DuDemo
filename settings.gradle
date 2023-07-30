@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // 使用logan时，加入的jcenter
+        // JCenter Maven 仓库在2021年5月1日后不再接收任何新的库版本、更新或修复补丁。
+        jcenter()
     }
 }
 
@@ -27,3 +30,4 @@ include ':core:album'
 include ':core:imageloader'
 include ':core:camera'
 include ':DemoAlbum'
+include ':Log'

@@ -67,5 +67,12 @@
         <item name="rippleColor">@color/clickColorPrimary</item>
         <item name="android:clickable">true</item>
     </style>
+    <style name="MyItemCardViewFocused" parent="MyMainCardViewFocused">
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+    </style>
+
 
 </resources>

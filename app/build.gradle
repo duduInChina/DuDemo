@@ -47,6 +47,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.1'
     implementation project(path: ':Download')
     implementation project(path: ':DemoAlbum')
+    implementation project(path: ':Log')
 
 
 }

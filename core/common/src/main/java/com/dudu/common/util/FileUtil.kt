@@ -30,19 +30,38 @@ object FileUtil {
      * app沙盒路径
      */
     fun getAppLocalPath(): String {
-
         if (appLocalPath == null) {
             appLocalPath = if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
-                // 有SD卡目录 /sdcard/Android/data/{包名}/{path}
+                // 有SD卡目录 /sdcard/Android/data/{包名}/cache/{path}，小米11卸载会删除
                 ContextManager.getContext().externalCacheDir!!.absolutePath
             } else {
-                // 没有sd卡 /data/data/{包名}/{path}
+                // 没有sd卡 /data/data/{包名}/cache/{path}，卸载会删除
                 ContextManager.getContext().cacheDir.absolutePath
             }
         }
 
         return appLocalPath!!
     }
+
+    /**
+     * /data/data/{包名}/files，卸载会删除
+     */
+    fun getFilesDir() = ContextManager.getContext().filesDir.absolutePath
+
+    /**
+     *  /data/data/{包名}/cache
+     */
+    fun getCacheDir() = ContextManager.getContext().cacheDir.absolutePath
+
+    /**
+     * /sdcard/Android/data/{包名}/files/{path}，文档描述卸载不会删除，实际小米11卸载会删除
+     * type: null（根目录） 或 Environment.DIRECTORY_PICTURES、Environment.DIRECTORY_MUSIC、Environment.DIRECTORY_MOVIES、Environment.DIRECTORY_DOWNLOADS
+     * 如：DIRECTORY_PICTURES，路径 /sdcard/Android/data/{包名}/files/Pictures
+     */
+    fun getExternalFileDir(type: String? = null) =
+        ContextManager.getContext().getExternalFilesDir(type)?.absolutePath ?: run {
+            getFilesDir()
+        }
 
     /**
      * 图片共有目录，用于图片裁剪
