@@ -149,6 +149,21 @@ object FileUtil {
     }
 
     /**
+     * 返回目录下所有文件，创建时间降序排序
+     */
+    fun getFilesListInDirectory(directoryPath: String, isSorted: Boolean = true): List<File>{
+        val dir = File(directoryPath)
+        if(!dir.exists() || !dir.isDirectory){
+            return emptyList()
+        }
+        val files = dir.listFiles()?.toList() ?: emptyList()
+        if(isSorted){
+            return files.sortedByDescending { it.lastModified() }
+        }
+        return files
+    }
+
+    /**
      * 保存String到文件，系统Api方案
      * MODE_PRIVATE 覆盖原来内容不存在就创建，MODE_APPEND 追加内容不存在就创建
      * 保存路径 /data/data/{包名}/files/{fileName}

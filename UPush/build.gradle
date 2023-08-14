@@ -4,7 +4,7 @@ plugins {
 }
 apply from: '../dependencies.gradle'
 android {
-    namespace 'com.dudu.log'
+    namespace 'com.dudu.upush'
     compileSdk 33
 
     defaultConfig {
@@ -28,12 +28,14 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enabled = true
-    }
 }
 
 dependencies {
+    // 友盟推送组件
+    implementation 'com.umeng.umsdk:common:9.6.3'
+    implementation 'com.umeng.umsdk:asms:1.8.0'
+    implementation 'com.umeng.umsdk:push:6.6.1'
+    implementation 'com.umeng.umsdk:uyumao:1.1.2'
+
     implementation project(path: ':core:common')
-    implementation project(path: ':core:upload')
 }

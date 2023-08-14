@@ -2,9 +2,9 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
-apply from: '../dependencies.gradle'
+apply from: '../../dependencies.gradle'
 android {
-    namespace 'com.dudu.log'
+    namespace 'com.dudu.upload'
     compileSdk 33
 
     defaultConfig {
@@ -28,12 +28,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enabled = true
-    }
 }
 
 dependencies {
-    implementation project(path: ':core:common')
-    implementation project(path: ':core:upload')
+    implementation project(path: ':core:network')
 }

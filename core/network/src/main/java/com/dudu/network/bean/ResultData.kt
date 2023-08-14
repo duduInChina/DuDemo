@@ -8,13 +8,13 @@ import kotlinx.serialization.Serializable
  * Created by Dzc on 2023/5/11.
  */
 @Serializable
-data class ResultData<T>(val errorCode: Int, val errorMsg: String?, val data: T? = null) :
+data class ResultData<T>(val errcode: Int, val message: String = "", val data: T? = null) :
     IResult {
 
-    override fun getErrorCode() = errorCode.toString()
+    override fun getErrorCode() = errcode.toString()
 
     override fun isSuccess() = "0"
 
-    override fun getErrorMessage() = errorMsg!!
+    override fun getErrorMessage() = message
 
 }

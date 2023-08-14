@@ -18,11 +18,18 @@ import java.io.File
  */
 class CommonLogLoader : LogLoader {
 
-
-
     companion object{
+
         val defaultTag by lazy {
             ContextManager.getContext().resources.getString(R.string.log_tag_name)
+        }
+
+        val XLogCacheDir by lazy {
+            FileUtil.getCacheDir() + File.separator + BuildConfig.LOG_DIR
+        }
+
+        val XLogDir by lazy {
+            FileUtil.getExternalFileDir() + File.separator + BuildConfig.LOG_DIR
         }
 
         // 各种Log参数配置初始化
@@ -54,8 +61,8 @@ class CommonLogLoader : LogLoader {
             Log.appenderOpen(
                 if(BuildConfig.DEBUG) Xlog.LEVEL_DEBUG else Xlog.LEVEL_INFO,
                 Xlog.AppednerModeAsync, // 异步写入文件
-                FileUtil.getCacheDir() + File.separator + BuildConfig.LOG_DIR,// mmap缓存路径
-                FileUtil.getExternalFileDir() + File.separator + BuildConfig.LOG_DIR,
+                XLogCacheDir,// mmap缓存路径
+                XLogDir,// 实际保存目录
                 "log", 0
             )
 

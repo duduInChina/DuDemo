@@ -2,6 +2,7 @@ package com.dudu.log
 
 import android.os.Bundle
 import com.dudu.common.base.activity.BaseActivity
+import com.dudu.common.base.activity.BaseVMActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
 import com.dudu.common.crash.XCrashManager
@@ -11,6 +12,8 @@ import com.dudu.common.ext.logI
 import com.dudu.common.ext.logV
 import com.dudu.common.ext.logW
 import com.dudu.common.ext.logX
+import com.dudu.common.log.CommonLogLoader
+import com.dudu.common.util.FileUtil
 import com.dudu.log.databinding.ActivityLogBinding
 
 /**
@@ -18,7 +21,7 @@ import com.dudu.log.databinding.ActivityLogBinding
  * Created by Dzc on 2023/7/24.
  */
 @Title(title = "日志", titleType = TitleType.COLL)
-class LogActivity:BaseActivity<ActivityLogBinding>() {
+class LogActivity : BaseVMActivity<ActivityLogBinding, LogViewModel>() {
 
     private val trackerInfo = """
             参考Tracker无埋点记录处理
@@ -32,9 +35,7 @@ class LogActivity:BaseActivity<ActivityLogBinding>() {
             Handler时间轮询，提交日志记录
         """.trimIndent()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun initView() {
         bodyBinding.trackerInfo.text = trackerInfo
 
         bodyBinding {
@@ -56,6 +57,18 @@ class LogActivity:BaseActivity<ActivityLogBinding>() {
             logX.setOnClickListener {
                 "logX".logX()
             }
+            logXPush.setOnClickListener {
+                // 获取日志列表
+                val fileList = FileUtil.getFilesListInDirectory(CommonLogLoader.XLogDir)
+                if (fileList.isNotEmpty()) {
+                    val file = fileList[0]
+                    if (file.isFile) {
+                        // 文件提交上传
+                        viewModel.uploadXLog(file)
+                    }
+                }
+
+            }
 
             javaCrash.setOnClickListener {
                 XCrashManager.testJavaCrash(false)
@@ -74,7 +87,9 @@ class LogActivity:BaseActivity<ActivityLogBinding>() {
 
 
         }
+    }
 
+    override fun initFlow() {
     }
 
 }
