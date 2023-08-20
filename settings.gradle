@@ -12,7 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
         // 使用logan时，加入的jcenter
         // JCenter Maven 仓库在2021年5月1日后不再接收任何新的库版本、更新或修复补丁。
-        jcenter()
+        // jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url "https://maven.aliyun.com/repository/public" }
     }
 }
 
@@ -33,3 +35,5 @@ include ':DemoAlbum'
 include ':Log'
 include ':core:upload'
 include ':UPush'
+include ':core:video'
+include ':Video'

@@ -11,6 +11,8 @@ import com.dudu.common.base.annotation.TitleType
 import com.dudu.demoalbum.DemoAlbumActivity
 import com.dudu.download.DownloadActivity
 import com.dudu.log.LogActivity
+import com.dudu.video.VideoActivity
+import com.dudu.video.list.VideoListActivity
 import com.dudu.weather.WeatherMainActivity
 
 
@@ -87,6 +89,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             """.trimIndent(),
                 Intent(this, LogActivity::class.java)
             ),
+
+            MainData("视频", """
+            • GSYVideoPlayer：视频播放SDK，支持IJKPlayer、EXOPlayer2、MediaPlayer
+            • 模拟实现视频列表、仿抖音竖屏列表，弹幕，窗口视频播放，还需更深入理解源码实现、视频预加载等
+            """.trimIndent(), Intent(this, VideoActivity::class.java))
+
         )
     }
 
@@ -111,7 +119,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
 
-        startActivity(Intent(this, LogActivity::class.java))
+        startActivity(Intent(this, VideoActivity::class.java))
 
     }
 }

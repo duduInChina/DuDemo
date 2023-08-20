@@ -49,6 +49,7 @@ dependencies {
     implementation project(path: ':DemoAlbum')
     implementation project(path: ':Log')
     implementation project(path: ':UPush')
+    implementation project(path: ':Video')
 
 
 }

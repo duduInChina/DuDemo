@@ -12,6 +12,8 @@ class CommonViewHolder<VB : ViewBinding>(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
     private var itemViewBinding: VB? = null
 
+    var tag: Any? = null
+
     constructor(itemViewBinding: VB) : this(itemViewBinding.root) {
         this.itemViewBinding = itemViewBinding
     }

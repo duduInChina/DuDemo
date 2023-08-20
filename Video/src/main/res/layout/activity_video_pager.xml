@@ -3,4 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <!--
+        ViewPager2和ViewPager的区别？
+        1、ViewPager2内部实现是RecyclerView，所以ViewPager2的性能更高。
+        2、ViewPager2可以实现竖向滑动，ViewPager只能横向滑动。
+        3、ViewPager2只有一个adapter，FragmentStateAdapter继承自RecyclerView.Adapter<FragmentViewHolder>。
+            而ViewPager有两个adapter,FragmentStatePagerAdapter和FragmentPagerAdapter，均是继承PagerAdapter。
+            FragmentStatePagerAdapter和FragmentPagerAdapter两者的区别是FragmentStatePagerAdapter不可以缓存，FragmentPagerAdapter可以缓存。
+        4、ViewPager2模式实现了懒加载，默认不进行预加载。内部是通过Lifecycle 对 Fragment 的生命周期进行管理。ViewPager会进行预加载，懒加载需要我们自己去实现
+        https://mp.weixin.qq.com/s/4nAunFnUKyJluV-3rWyWSg
+    -->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

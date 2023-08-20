@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
-
+apply from: '../../dependencies.gradle'
 android {
     namespace 'com.dudu.video'
     compileSdk 33
@@ -32,10 +32,18 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.9.0'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // 方案一：完整导入，ijkPlayer，ExoPlayer，统一导入，app打包大小约45M
+    // api 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer:v8.4.0-release-jitpack'
+
+    // 方案二：部分导入
+    api 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-java:v8.4.0-release-jitpack'
+
+    // 是否需要ExoPlayer模式, app打包大小约5M，默认没特殊要求都选用该模式
+    api 'com.github.CarGuo.GSYVideoPlayer:GSYVideoPlayer-exo2:v8.4.0-release-jitpack'
+    //根据你的需求ijk模式的so
+//    implementation 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-arm64:v8.4.0-release-jitpack'
+//    implementation 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-armv7a:v8.4.0-release-jitpack'
+//    implementation 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-armv5:v8.4.0-release-jitpack'
+//    implementation 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-x86:v8.4.0-release-jitpack'
+//    implementation 'com.github.CarGuo.GSYVideoPlayer:gsyVideoPlayer-x64:v8.4.0-release-jitpack'
 }

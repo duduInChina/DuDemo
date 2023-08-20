@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/videoList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/MyMainCardView">
+        style="@style/MyMainCardView"
+        app:contentPadding="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/black">
 
             <FrameLayout
                 android:id="@+id/contentLayout"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"/>
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <ImageView
                 android:id="@+id/playBtn"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/media3_notification_play"
+                android:src="@drawable/video_play_pressed"
                 />
 
         </RelativeLayout>
