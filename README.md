@@ -17,7 +17,8 @@
 - RootLayout：Activity和Fragment加入根布局，装载标题、加载UI、空布局UI
 -  PermissionX：权限判断，在当前Activity加入空布局的Fragment完成判断流程
 
-![weather](./images/common.gif) 
+<img src="./images/common.gif" alt="weather" style="zoom:67%;" /> 
+
 ### 天气预报
 
 根据《第一行代码》Demo进行优化调整
@@ -28,7 +29,7 @@
         CallAdapter：增加Flow数据流方式返回
         Converter：增加kotlinx.serialization解析JSON，同时判断业务ErrorCode
 
-![weather](./images/weather.jpg) 
+<img src="./images/weather.jpg" alt="weather" style="zoom:67%;" /> 
 
 ### 文件下载
 
@@ -42,7 +43,7 @@
 - apk安装：app安装权限处理，FileProvider需提供其他应用Uri路径处理
 - gradle：根据配置参数自动生成xml资源文件
 
-![download](./images/download.jpg) 
+<img src="./images/download.jpg" alt="download" style="zoom:67%;" /> 
 
 ### 相册
 
@@ -52,7 +53,7 @@
 - registerForActivityResult：扩展封装界面回调方式，处理回调更简洁
 - ContentResolver：媒体数据库查询，flow数据流方式返回
 
-![alum](./images/alum.jpg)   ![photos](./images/photos.jpg)
+<img src="./images/alum.jpg" alt="alum" style="zoom:67%;" />   <img src="./images/photos.jpg" alt="photos" style="zoom:67%;" />
 
 ### 日志
 
@@ -60,3 +61,12 @@
 - 数据及状态埋点日志：输出到控制台和文件归档，日志回捞（必要是推送push提交）需提交的日志文件，封装XLog实现
 - 异常日志：Crash崩溃日志，输出到控制台和文件归档，下次打开app触发提交，封装XCrash实现
 - 行为埋点日志：业务需求需记录的行为日志、曝光日志、点击日志，输出到控制台和数据库记录，根据时间段提交
+
+<img src="./images/log.jpg" alt="log" style="zoom:67%;" /> 
+
+### 视频
+
+- GSYVideoPlayer：视频播放SDK，支持IJKPlayer、EXOPlayer2、MediaPlayer
+- 模拟实现视频列表、仿抖音竖屏列表，弹幕，窗口视频播放，还需更深入理解源码实现、视频预加载等
+
+<img src="./images/video.jpg" alt="video" style="zoom:67%;" /> <img src="./images/videolist.jpg" alt="videolist" style="zoom:67%;" />
