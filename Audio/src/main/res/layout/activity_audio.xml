@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/musicLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardView"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="音乐名"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium"/>
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="演唱者"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/Widget.AppCompat.SeekBar"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/previousBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/icon_previous" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/playBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/icon_play"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/nextBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/icon_skip_next"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/autoLocalBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_margin="5dp"
+                        android:text="本地音乐"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/urlBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_margin="5dp"
+                        android:text="线上音乐"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/playListBtn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    style="@style/MyItemCardViewFocused"
+                    android:layout_marginRight="10dp"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/text_medium"
+                        android:textColor="@color/textColorPrimary"
+                        android:layout_margin="5dp"
+                        android:text="播放列表"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/soundLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardViewFocused">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="提示音"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• 播放项目中音频资源（和音乐同时播放，音乐声音变小）\n• 常驻服务获得通知后播放的提示音播放方式"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/appWidgetLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyMainCardViewFocused">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小部件"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• 触发广播通知小部件刷新"
+                android:textColor="@color/textColorPrimary"
+                android:textSize="@dimen/text_small"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- 底部弹出的折叠布局  -->
+    <!-- 下拉是否可以全部隐藏，默认false
+         app:behavior_hideable="true"
+         //设置折叠状态的显示高度(STATE_COLLAPSED)
+         app:behavior_peekHeight="100dp"
+         //下拉时是否可以跳过折叠状态直接隐藏，默认false
+         app:behavior_skipCollapsed="true"
+         //是否可以拖动，默认true
+         app:behavior_draggable="false"
+   -->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/sheetLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/clickColorPrimary"-->
+<!--        app:behavior_hideable = "true"-->
+<!--        app:behavior_skipCollapsed="true"-->
+<!--        app:behavior_peekHeight="1dp"-->
+<!--        app:layout_behavior="@string/bottom_sheet_behavior"-->
+<!--        >-->
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            app:cardElevation="16dp"-->
+<!--            app:cardCornerRadius="16dp"-->
+<!--            app:marginTopSystemWindowInsets="true"-->
+<!--            android:background="@color/clickColorPrimary">-->
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="300dp"-->
+<!--                android:text="test"/>-->
+
+<!--        </androidx.cardview.widget.CardView>-->
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+</LinearLayout>

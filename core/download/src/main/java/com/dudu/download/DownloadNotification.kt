@@ -21,18 +21,22 @@ class DownloadNotification {
         private const val CHANNEL_ID = "download_channel_normal"
 
         private fun getNotificationManager(): NotificationManager {
-            return ContextManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager = ContextManager.getContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            notificationManager.getNotificationChannel(CHANNEL_ID)?:let{
+                // 注册应用通知渠道： 渠道id 、 渠道名称 、 重要等级
+                val channel = NotificationChannel(CHANNEL_ID, "下载", NotificationManager.IMPORTANCE_LOW)
+                notificationManager.createNotificationChannel(channel)
+            }
+
+            return notificationManager
         }
 
         fun showNotification(id: Int, task: DownloadTask){
 
             val notificationManager = getNotificationManager()
 
-            // 注册应用通知渠道： 渠道id 、 渠道名称 、 重要等级
-            val channel = NotificationChannel(CHANNEL_ID, "下载", NotificationManager.IMPORTANCE_LOW)
-            notificationManager.createNotificationChannel(channel)
-
-            val bulider = NotificationCompat.Builder(ContextManager.getContext(), CHANNEL_ID)
+            val builder = NotificationCompat.Builder(ContextManager.getContext(), CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_download_notification)
                 .setContentTitle(task.taskData.notificationTitle?:task.taskData.fileName)
                 .setAutoCancel(task.status is DownloadStatus.Done)// 点击取消
@@ -42,14 +46,14 @@ class DownloadNotification {
                 is DownloadStatus.Downloading -> {
                     Log.d("DownloadNotification", task.progress.toString())
                     val s = FileUtil.formatFileSize(task.taskData.readLength) + "/" + FileUtil.formatFileSize(task.taskData.contentLength)
-                    bulider.setContentText(s)
+                    builder.setContentText(s)
 //                    val percent = if(task.contentLength <= 0) 0 else (task.readLength/task.contentLength.toDouble() * 100).toInt()
-                    bulider.setProgress(100, task.progress, task.progress <= 0)// indeterminate 是否显示加载
+                    builder.setProgress(100, task.progress, task.progress <= 0)// indeterminate 是否显示加载
                 }
 
                 is DownloadStatus.Done -> {
-                    bulider.setContentText("下载完成")
-                    bulider.setProgress(100, 100, false)
+                    builder.setContentText("下载完成")
+                    builder.setProgress(100, 100, false)
                     if(task.taskData.autoInstall){
                         // 点击安装
                     }
@@ -57,7 +61,7 @@ class DownloadNotification {
 
                 is DownloadStatus.Failed -> {
                     // 通知重新下载
-                    bulider.setContentText("下载失败")
+                    builder.setContentText("下载失败")
                 }
 
                 else -> {}
@@ -67,9 +71,9 @@ class DownloadNotification {
             if(task.taskData.foregroundService && DownloadManager.downloadService != null){
                 // 多个不同id，只会显示第一个（最后跟新的），多任务状态下统一id
                 // TODO 关闭通知等，检查service是否启用，初始时app是否在前台（才执行的否则异常）
-                DownloadManager.downloadService?.startForeground(id, bulider.build())
+                DownloadManager.downloadService?.startForeground(id, builder.build())
             }else{
-                notificationManager.notify(id, bulider.build())
+                notificationManager.notify(id, builder.build())
             }
 
 

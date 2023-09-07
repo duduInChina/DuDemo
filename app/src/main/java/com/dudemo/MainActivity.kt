@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dudemo.databinding.ActivityMainBinding
+import com.dudu.audio.AudioActivity
 import com.dudu.common.base.activity.BaseActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
@@ -93,7 +94,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             MainData("视频", """
             • GSYVideoPlayer：视频播放SDK，支持IJKPlayer、EXOPlayer2、MediaPlayer
             • 模拟实现视频列表、仿抖音竖屏列表，弹幕，窗口视频播放，还需更深入理解源码实现、视频预加载等
-            """.trimIndent(), Intent(this, VideoActivity::class.java))
+            """.trimIndent(), Intent(this, VideoActivity::class.java)),
+
+            MainData("音频", """
+            • 音乐播放器：Jetpack Media3构建，ExoPlayer解析媒体，MediaLibrarySession构建会话提供媒体信息，MediaLibraryService媒体服务处理后台播放，MediaBrowser媒体客户端媒体控制器，MediaStyleNotificationHelper.MediaStyle统一媒体通知播放控制器，适配蓝牙按钮控制，音频焦点切换暂停
+            • 提示音：SoundPool音频资源可预加载到内存中，短音频一次或循环播放，整合操作类SoundManager，通常作用按键音或推送通知信息提示音
+            • 音乐播放小部件：AppWidgetProvider，拉起媒体服务、弹出媒体播放通知、小部件获取通知刷新控件播放状态
+            • 其他：CustomBottomSheetDialog底部弹出控件、本地音频媒体获取
+            """.trimIndent(), Intent(this, AudioActivity::class.java))
 
         )
     }
@@ -118,8 +126,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 startActivity(it)
             }
         }
-
-        startActivity(Intent(this, VideoActivity::class.java))
 
     }
 }

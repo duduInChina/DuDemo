@@ -1,0 +1,20 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<!-- appwidget配置信息   -->
+<!--
+    minHeight、minWidth 定义Widget的最小高度和最小宽度（Widget可以通过拉伸来调整尺寸大小）。通常一格最小为72-73dp，74dp已经为两格，为最小大小范围，如布局内容大于该范围截取显示
+    previewImage 定义添加小部件时显示的图标。选择部件时，展示的图标
+    initialLayout 定义了小部件使用的布局。
+    updatePeriodMillis 定义小部件自动更新的周期，单位为毫秒。请求的更新updatePeriodMillis 每 30 分钟发送一次不会超过一次。
+    resizeMode 指定了 widget 的调整尺寸的规则。可取的值有: “horizontal”, “vertical”, “none”。“horizontal"意味着widget可以水平拉伸，“vertical”意味着widget可以竖值拉伸，“none”意味着widget不能拉伸；默认值是"none”。
+    widgetCategory 指定了 widget 能显示的地方：能否显示在 home Screen 或 lock screen 或 两者都可以。它的取值包括：“home_screen” 和 “keyguard”。Android 4.2 引入。
+ https://developer.android.com/reference/android/appwidget/AppWidgetProviderInfo#updatePeriodMillis
+ -->
+<appwidget-provider
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="144dp"
+    android:minHeight="72dp"
+    android:previewImage="@mipmap/ic_launcher"
+    android:initialLayout="@layout/layout_audio_widget"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen"
+    />

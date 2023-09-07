@@ -62,9 +62,15 @@ dependencies {
     api 'com.guolindev.permissionx:permissionx:1.7.1'
     // 注解，class.annotations 当前默认kotlin-stdlib 为1.8.10
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.10'
+    // json 解析
+    api 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0'// 解析效率高，https://blog.jetbrains.com/zh-hans/kotlin/2021/05/kotlinx-serialization-1-2-released/
+
 
     // LogCat日志，格式风格
-    implementation 'com.orhanobut:logger:2.2.0'
+//    implementation 'com.orhanobut:logger:2.2.0'
+    // logger 上面官方版本还未适配AndroidX包含旧包，编译警告异常，当前使用下面映射修改版本
+    implementation 'com.github.orhanobut:logger:master-SNAPSHOT'
+
     // 日志，mmap内存映射文件（高性能，防丢失），内容加密压缩，分片
 //    implementation 'com.dianping.android.sdk:logan:1.2.4'
     implementation 'com.tencent.mars:mars-xlog:1.2.5'

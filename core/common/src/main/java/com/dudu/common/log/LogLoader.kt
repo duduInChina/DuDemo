@@ -14,4 +14,6 @@ interface LogLoader {
 
     // 利用xLog记录到文件
     fun x(msg: String)
+
+    fun obj(obj: Any)
 }

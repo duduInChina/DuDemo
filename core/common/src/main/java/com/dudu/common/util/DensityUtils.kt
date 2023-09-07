@@ -13,4 +13,10 @@ object DensityUtils {
         return (dpValue * scale + 0.5f).toInt()
     }
 
+    /**
+     * 屏幕高度像素
+     */
+    fun getScreenHeightPixels() = ContextManager.getContext().resources.displayMetrics.heightPixels
+
+
 }

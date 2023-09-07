@@ -70,3 +70,12 @@
 - 模拟实现视频列表、仿抖音竖屏列表，弹幕，窗口视频播放，还需更深入理解源码实现、视频预加载等
 
 <img src="./images/video.jpg" alt="video" style="zoom:67%;" /> <img src="./images/videolist.jpg" alt="videolist" style="zoom:67%;" />
+
+### 音频
+
+- 音乐播放器：Jetpack Media3构建，ExoPlayer解析媒体，MediaLibrarySession构建会话提供媒体信息，MediaLibraryService媒体服务处理后台播放，MediaBrowser媒体客户端媒体控制器，MediaStyleNotificationHelper.MediaStyle统一媒体通知播放控制器，适配蓝牙按钮控制，音频焦点切换暂停
+- 提示音：SoundPool音频资源可预加载到内存中，短音频一次或循环播放，整合操作类SoundManager，通常作用按键音或推送通知信息提示音
+- 音乐播放小部件：AppWidgetProvider，拉起媒体服务、弹出媒体播放通知、小部件获取通知刷新控件播放状态
+- 其他：CustomBottomSheetDialog底部弹出控件、本地音频媒体获取
+
+<img src="./images/audio1.jpg" alt="audio1" style="zoom:67%;" /> <img src="./images/audio2.jpg" alt="audio2" style="zoom:67%;" /> <img src="./images/audio3.jpg" alt="audio3" style="zoom:67%;" />

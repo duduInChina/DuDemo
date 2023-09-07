@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../dependencies.gradle'
+android {
+    namespace 'com.dudu.demoaudio'
+    compileSdk 33
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 33
+
+        // 配置文件参数
+        // 小部件内部更新配置广播参数
+        manifestPlaceholders = [audioWidgetUpdateReceiverAction: "com.dudu.demo.update"]
+
+        buildConfigField("String", "AUDIO_WIDGET_UPDATE", "\"${manifestPlaceholders['audioWidgetUpdateReceiverAction']}\"")
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+    // 启用 buildConfigField
+    buildFeatures {
+        buildConfig true
+    }
+}
+
+dependencies {
+
+    implementation project(path: ':core:common')
+    implementation project(path: ':core:audio')
+}

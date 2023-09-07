@@ -1,15 +1,19 @@
 package com.dudu.common.log
 
+import android.database.Cursor
+import androidx.core.database.getStringOrNull
 import com.dudu.common.BuildConfig
 import com.dudu.common.R
 import com.dudu.common.util.ContextManager
 import com.dudu.common.util.FileUtil
+import com.dudu.common.util.JsonUtil
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.tencent.mars.xlog.Log
 import com.tencent.mars.xlog.Xlog
 import java.io.File
+import java.io.Serializable
 
 
 /**
@@ -114,6 +118,33 @@ class CommonLogLoader : LogLoader {
     override fun x(msg: String) {
         Logger.i(msg)
         Log.i(defaultTag, msg)
+    }
+
+    override fun obj(obj: Any) {
+        if(!BuildConfig.DEBUG) return
+
+        if(obj is Cursor) {
+
+            val builder = StringBuilder()
+            builder.append("Cursor Data:\n")
+            // 遍历Cursor的列
+            obj.moveToFirst() // 移动到第一行
+            do{
+                for (i in 0 until obj.columnCount) {
+                    val columnName: String = obj.getColumnName(i)
+                    val columnValue: String? = obj.getStringOrNull(obj.getColumnIndex(columnName))
+                    builder.append(columnName).append(": ").append(columnValue).append("\n")
+                }
+                builder.append("\n")
+            }while (obj.moveToNext())
+
+            obj.moveToFirst() // 移动到第一行
+
+            d(builder.toString())
+
+        } else if(obj is Serializable){
+            Logger.json(JsonUtil.encodeToString(obj))
+        }
     }
 
 

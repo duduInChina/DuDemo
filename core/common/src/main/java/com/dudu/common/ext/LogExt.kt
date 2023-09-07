@@ -1,5 +1,6 @@
 package com.dudu.common.ext
 
+import android.database.Cursor
 import com.dudu.common.CommonConstant
 
 /**
@@ -15,3 +16,6 @@ fun String.logI() = CommonConstant.logLoader.i(this)
 
 fun String.logX() = CommonConstant.logLoader.x(this)
 
+fun <T> List<T>.logD() = CommonConstant.logLoader.obj(this)
+
+fun Cursor.logD() = CommonConstant.logLoader.obj(this)

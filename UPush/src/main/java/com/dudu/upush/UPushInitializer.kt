@@ -9,7 +9,7 @@ import androidx.startup.Initializer
  */
 class UPushInitializer : Initializer<Unit> {
     override fun create(context: Context) {
-        UPushManager.init(context)
+        //UPushManager.init(context)
     }
 
     override fun dependencies() = emptyList<Class<Initializer<*>>>()

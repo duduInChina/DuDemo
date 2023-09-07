@@ -23,7 +23,7 @@ class WebServiceTest {
             envelope.dotNet = true
             envelope.setOutputSoapObject(request)
 
-            val ht = HttpTransportSE("http://47.110.154.0:8183/webservice/n_webservice.asmx")
+            val ht = HttpTransportSE("")
             ht.debug = true
             try {
                 // 请求WS

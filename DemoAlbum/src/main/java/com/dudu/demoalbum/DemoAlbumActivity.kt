@@ -3,6 +3,7 @@ package com.dudu.demoalbum
 import android.Manifest
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.dudu.album.AlbumActivity
@@ -84,7 +85,10 @@ class DemoAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
 
             myAlbumCardView.setOnClickListener {
                 PermissionX.init(this@DemoAlbumActivity)
-                    .permissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    .permissions(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                        Manifest.permission.READ_MEDIA_IMAGES
+                    else
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
                     .request { allGranted, _, _ ->
                         if (allGranted) {
                             AlbumConstant.imageLoader = CoilImageLoader

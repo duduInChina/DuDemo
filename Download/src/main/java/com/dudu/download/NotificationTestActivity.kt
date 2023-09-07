@@ -80,7 +80,7 @@ class NotificationTestActivity : BaseActivity<ActivityNotificationBinding>() {
             ContextManager.getContext(),
             CHANNEL_TEST_ID
         )
-            .setSmallIcon(R.drawable.ic_notification_test)
+            //.setSmallIcon(R.drawable.ic_download_notification)
             .setContentTitle("Test")
 
         bulider.setSubText(percent.toString())

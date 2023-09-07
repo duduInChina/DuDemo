@@ -50,6 +50,7 @@ dependencies {
     implementation project(path: ':Log')
     implementation project(path: ':UPush')
     implementation project(path: ':Video')
+    implementation project(path: ':Audio')
 
 
 }
