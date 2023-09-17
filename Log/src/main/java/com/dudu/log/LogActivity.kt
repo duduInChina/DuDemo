@@ -13,14 +13,17 @@ import com.dudu.common.ext.logV
 import com.dudu.common.ext.logW
 import com.dudu.common.ext.logX
 import com.dudu.common.log.CommonLogLoader
+import com.dudu.common.router.RouterPath
 import com.dudu.common.util.FileUtil
 import com.dudu.log.databinding.ActivityLogBinding
+import com.therouter.router.Route
 
 /**
  * 功能介绍
  * Created by Dzc on 2023/7/24.
  */
 @Title(title = "日志", titleType = TitleType.COLL)
+@Route(path = RouterPath.LOG)
 class LogActivity : BaseVMActivity<ActivityLogBinding, LogViewModel>() {
 
     private val trackerInfo = """

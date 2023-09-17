@@ -9,17 +9,20 @@ import androidx.media3.common.util.UnstableApi
 import com.dudu.common.base.activity.BaseVMActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
+import com.dudu.common.router.RouterPath
 import com.dudu.common.widget.CustomBottomSheetDialog
 import com.dudu.demoaudio.BuildConfig
 import com.dudu.demoaudio.databinding.ActivityAudioBinding
 import com.permissionx.guolindev.PermissionX
 import com.dudu.demoaudio.R
+import com.therouter.router.Route
 
 /**
  * 功能介绍
  * Created by Dzc on 2023/8/30.
  */
 @Title(title = "音频", true, TitleType.COLL)
+@Route(path = RouterPath.AUDIO)
 class AudioActivity : BaseVMActivity<ActivityAudioBinding, AudioViewModel>() {
 
     private val localFragment: AudioLocalListFragment by lazy {

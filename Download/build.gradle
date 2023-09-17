@@ -1,13 +1,22 @@
-plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+boolean toapp = moduleToApplication.toBoolean()
+if(toapp){
+    apply plugin: 'com.android.application'
+    apply plugin: 'therouter'
+}else {
+    apply plugin: 'com.android.library'
 }
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'org.jetbrains.kotlin.kapt'
+
 apply from: '../dependencies.gradle'
 android {
     namespace 'com.dudu.download'
     compileSdk 33
 
     defaultConfig {
+        if(toapp){
+            applicationId "com.dudemo.download"
+        }
         minSdk 26
         targetSdk 33
 
@@ -22,18 +31,29 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     viewBinding {
         enabled = true
     }
+    sourceSets {
+        main {
+            if (toapp) {
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/release/AndroidManifest.xml'
+            }
+        }
+    }
 }
 
 dependencies {
-implementation project(path: ':core:download')
+    kapt "cn.therouter:apt:$TheRouterVersion"
+    implementation project(path: ':core:datastore-ktx')
+    implementation project(path: ':core:download')
     implementation project(path: ':core:common')
 }

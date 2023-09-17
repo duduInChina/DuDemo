@@ -8,18 +8,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dudu.common.base.activity.BaseVMActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
+import com.dudu.common.router.RouterPath
 import com.dudu.common.util.ContextManager
 import com.dudu.download.DownloadConstant.Companion.apkUrl
 import com.dudu.download.DownloadConstant.Companion.urlList
 import com.dudu.download.bean.DownloadStatus
 import com.dudu.download.dao.DownloadTaskData
 import com.dudu.download.databinding.ActivityDownloadBinding
+import com.therouter.router.Route
 
 /**
  * 功能介绍
  * Created by Dzc on 2023/5/21.
  */
 @Title("下载", true, TitleType.COLL)
+@Route(path = RouterPath.DOWNLOAD)
 class DownloadActivity : BaseVMActivity<ActivityDownloadBinding, DownloadViewModel>() {
 
     private var apkTask: DownloadTask? = null

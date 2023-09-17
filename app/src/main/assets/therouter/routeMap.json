@@ -1,0 +1,65 @@
+[
+  {
+    "path": "http://dudu.com/weather",
+    "className": "com.dudu.weather.WeatherMainActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/video",
+    "className": "com.dudu.video.VideoActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/router/activityfragment",
+    "className": "com.dudu.router.RouterFragmentActivity",
+    "action": "",
+    "description": "Fragment容器页",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/router/fragment",
+    "className": "com.dudu.router.RouterFragment",
+    "action": "",
+    "description": "Fragment测试页",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/router",
+    "className": "com.dudu.router.RouterActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/log",
+    "className": "com.dudu.log.LogActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/download",
+    "className": "com.dudu.download.DownloadActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/album",
+    "className": "com.dudu.demoalbum.DemoAlbumActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  },
+  {
+    "path": "http://dudu.com/audio",
+    "className": "com.dudu.audio.AudioActivity",
+    "action": "",
+    "description": "",
+    "params": {}
+  }
+]

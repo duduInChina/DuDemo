@@ -7,6 +7,7 @@ import android.provider.Settings
 import androidx.core.content.ContextCompat
 import com.dudu.common.ext.logD
 import com.dudu.common.ext.registerResult
+import com.dudu.common.router.RouterPath
 import com.dudu.common.util.ContextManager
 import com.dudu.common.util.StatusBarUtil
 import com.dudu.video.databinding.ActivityVideoBinding
@@ -15,6 +16,7 @@ import com.dudu.video.pager.VideoPagerActivity
 import com.shuyu.gsyvideoplayer.builder.GSYVideoOptionBuilder
 import com.shuyu.gsyvideoplayer.player.PlayerFactory
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+import com.therouter.router.Route
 import master.flame.danmaku.controller.DrawHandler
 import master.flame.danmaku.danmaku.model.BaseDanmaku
 import master.flame.danmaku.danmaku.model.Danmaku
@@ -28,6 +30,7 @@ import tv.danmaku.ijk.media.exo2.Exo2PlayerManager
  * 功能介绍
  * Created by Dzc on 2023/8/14.
  */
+@Route(path = RouterPath.VIDEO)
 class VideoActivity :
     VideoDetailBaseActivity<ActivityVideoBinding, VideoViewModel, StandardGSYVideoPlayer>() {
 

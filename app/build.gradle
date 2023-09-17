@@ -1,8 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    // kapt注解处理器，使用了注解模块都需要引入
+    id 'org.jetbrains.kotlin.kapt'
+    // 引入therouter插件，只要是有com.android.application这个的模块
+    id 'therouter'
 }
-
+boolean toapp = moduleToApplication.toBoolean()
 apply from: '../dependencies.gradle' // 导入统一配置
 
 android {
@@ -26,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     viewBinding {
         enabled = true
@@ -39,18 +43,22 @@ android {
 
 dependencies {
 
+    kapt "cn.therouter:apt:$TheRouterVersion"
 
     implementation project(path: ':core:common')
-    implementation project(path: ':Weather')
 
     // Android 12 提供了启动画面的API, 该库为向后兼容库，参考：https://developer.android.google.cn/guide/topics/ui/splash-screen/migrate?hl=zh-cn
     implementation 'androidx.core:core-splashscreen:1.0.1'
-    implementation project(path: ':Download')
-    implementation project(path: ':DemoAlbum')
-    implementation project(path: ':Log')
-    implementation project(path: ':UPush')
-    implementation project(path: ':Video')
-    implementation project(path: ':Audio')
 
+    if (!toapp){
+        implementation project(path: ':Weather')
+        implementation project(path: ':Download')
+        implementation project(path: ':DemoAlbum')
+        implementation project(path: ':Log')
+        implementation project(path: ':UPush')
+        implementation project(path: ':Video')
+        implementation project(path: ':Audio')
+        implementation project(path: ':Router')
+    }
 
 }

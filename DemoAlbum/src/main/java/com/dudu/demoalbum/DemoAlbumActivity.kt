@@ -15,9 +15,11 @@ import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
 import com.dudu.common.base.view.ImageLoader
 import com.dudu.common.ext.registerResult
+import com.dudu.common.router.RouterPath
 import com.dudu.demoalbum.databinding.ActivityDemoAlbumBinding
 import com.dudu.imageloader.CoilImageLoader
 import com.permissionx.guolindev.PermissionX
+import com.therouter.router.Route
 
 /**
  * 参考
@@ -26,6 +28,7 @@ import com.permissionx.guolindev.PermissionX
  * Created by Dzc on 2023/7/2.
  */
 @Title(title = "相册", titleType = TitleType.COLL)
+@Route(path = RouterPath.ALBUM)
 class DemoAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
 
     private val imageLoader: ImageLoader = CoilImageLoader
@@ -39,11 +42,13 @@ class DemoAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
         }
     }
 
-    private lateinit var cameraUri : Uri
+    private var cameraUri : Uri ?= null
     private val cameraResult = registerResult { _, _ ->
-        Log.d("SysCamera", cameraUri.toString())
-        // 图片加载库，已自动把照片旋转调为正向
-        imageLoader.load(bodyBinding.sysCameraImage, cameraUri)
+        cameraUri?.let {
+            Log.d("SysCamera", it.toString())
+            // 图片加载库，已自动把照片旋转调为正向
+            imageLoader.load(bodyBinding.sysCameraImage, it)
+        }
     }
 
     private lateinit var cropUri : Uri
@@ -76,7 +81,7 @@ class DemoAlbumActivity : BaseActivity<ActivityDemoAlbumBinding>() {
             sysCameraCardView.setOnClickListener {
                 // 没申请相机权限却可以完成拍照流程（配置文件中也没有写Camera权限）, 反而在配置中写了Camera权限则需申请，TODO 还需核实情况
                 cameraUri = CameraUtil.getCameraUri(System.currentTimeMillis().toString() + ".jpg")
-                cameraResult.launch(CameraUtil.getSysCameraIntent(cameraUri))
+                cameraResult.launch(CameraUtil.getSysCameraIntent(cameraUri!!))
             }
 
             sysCropCardView.setOnClickListener {

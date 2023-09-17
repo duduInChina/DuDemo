@@ -10,12 +10,12 @@ apply plugin: 'org.jetbrains.kotlin.kapt'
 
 apply from: '../dependencies.gradle'
 android {
-    namespace 'com.dudu.video'
+    namespace 'com.dudu.router'
     compileSdk 33
 
     defaultConfig {
         if(toapp){
-            applicationId "com.dudemo.video"
+            applicationId "com.dudemo.router"
         }
         minSdk 26
         targetSdk 33
@@ -54,9 +54,5 @@ android {
 dependencies {
     kapt "cn.therouter:apt:$TheRouterVersion"
     implementation project(path: ':core:common')
-    implementation project(path: ':core:video')
-
-    implementation "com.github.CarGuo.DanmakuFlameMaster:DanmakuFlameMaster:0.9.25"
-    implementation project(path: ':core:datastore-ktx')
 
 }

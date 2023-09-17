@@ -76,4 +76,8 @@ dependencies {
     implementation 'com.tencent.mars:mars-xlog:1.2.5'
     // 捕获java崩溃，native崩溃，ANR
     implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
+
+    // 路由
+    api "cn.therouter:router:$TheRouterVersion"
+
 }

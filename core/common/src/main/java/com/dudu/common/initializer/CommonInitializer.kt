@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.startup.Initializer
 import com.dudu.common.crash.XCrashManager
 import com.dudu.common.log.CommonLogLoader
+import com.dudu.common.router.TheRouterLoader
 import com.dudu.common.util.ContextManager
 
 /**
@@ -14,6 +15,8 @@ import com.dudu.common.util.ContextManager
 class CommonInitializer : Initializer<Unit> {
     override fun create(context: Context) {
         ContextManager.init(context as Application)
+
+        TheRouterLoader.init()
 
         CommonLogLoader.logInit()
 

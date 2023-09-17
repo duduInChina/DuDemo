@@ -1,20 +1,15 @@
 package com.dudemo
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dudemo.databinding.ActivityMainBinding
-import com.dudu.audio.AudioActivity
 import com.dudu.common.base.activity.BaseActivity
 import com.dudu.common.base.annotation.Title
 import com.dudu.common.base.annotation.TitleType
-import com.dudu.demoalbum.DemoAlbumActivity
-import com.dudu.download.DownloadActivity
-import com.dudu.log.LogActivity
-import com.dudu.video.VideoActivity
-import com.dudu.video.list.VideoListActivity
-import com.dudu.weather.WeatherMainActivity
+import com.dudu.common.ext.logD
+import com.dudu.common.router.RouterPath
+import com.therouter.TheRouter
 
 
 /**
@@ -45,6 +40,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             ),
 
             MainData(
+                "模块化/组件化", """
+            • TheRouter：
+                    Route：实现路由，跨模块调用
+                    ServiceProvider：依赖注入AOP能力
+                    FlowTask：业务节点初始化能力（每个进程只会调用一次该注解方法）
+                    ActivityManager：注入任务事件跨模块调度，如：EventBus、LiveData观察者模式
+            • gradle.properties中配置moduleToApplication，子模块单独编译测试
+        """.trimIndent(),
+            routerPath = RouterPath.ROUTER
+            ),
+
+            MainData(
                 "天气预报", """
             根据《第一行代码》Demo进行优化调整
             • 沉浸式标题栏适配，已适配sdk30，StatusBarUtil
@@ -54,7 +61,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     CallAdapter：增加Flow数据流方式返回
                     Converter：增加kotlinx.serialization解析JSON，同时判断业务ErrorCode
         """.trimIndent(),
-                Intent(this, WeatherMainActivity::class.java)
+//                Intent(this, WeatherMainActivity::class.java)
+            routerPath = RouterPath.WEATHER
             ),
 
             MainData(
@@ -69,7 +77,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
            • apk安装：app安装权限处理，FileProvider需提供其他应用Uri路径处理
            • gradle：根据配置参数自动生成xml资源文件
         """.trimIndent(),
-                Intent(this, DownloadActivity::class.java)
+//                Intent(this, DownloadActivity::class.java)
+            routerPath = RouterPath.DOWNLOAD
             ),
 
             MainData(
@@ -79,7 +88,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             • registerForActivityResult：扩展封装界面回调方式，处理回调更简洁
             • ContentResolver：媒体数据库查询，flow数据流方式返回
             """.trimIndent(),
-                Intent(this, DemoAlbumActivity::class.java)
+//                Intent(this, DemoAlbumActivity::class.java)
+            routerPath = RouterPath.ALBUM
             ),
 
             MainData("日志","""
@@ -88,20 +98,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             • 异常日志：Crash崩溃日志，输出到控制台和文件归档，下次打开app触发提交，封装XCrash实现
             • 行为埋点日志：业务需求需记录的行为日志、曝光日志、点击日志，输出到控制台和数据库记录，根据时间段提交
             """.trimIndent(),
-                Intent(this, LogActivity::class.java)
+//                Intent(this, LogActivity::class.java)
+            routerPath = RouterPath.LOG
             ),
 
             MainData("视频", """
             • GSYVideoPlayer：视频播放SDK，支持IJKPlayer、EXOPlayer2、MediaPlayer
             • 模拟实现视频列表、仿抖音竖屏列表，弹幕，窗口视频播放，还需更深入理解源码实现、视频预加载等
-            """.trimIndent(), Intent(this, VideoActivity::class.java)),
+            """.trimIndent(),
+//                Intent(this, VideoActivity::class.java)
+            routerPath = RouterPath.VIDEO
+            ),
 
             MainData("音频", """
             • 音乐播放器：Jetpack Media3构建，ExoPlayer解析媒体，MediaLibrarySession构建会话提供媒体信息，MediaLibraryService媒体服务处理后台播放，MediaBrowser媒体客户端媒体控制器，MediaStyleNotificationHelper.MediaStyle统一媒体通知播放控制器，适配蓝牙按钮控制，音频焦点切换暂停
             • 提示音：SoundPool音频资源可预加载到内存中，短音频一次或循环播放，整合操作类SoundManager，通常作用按键音或推送通知信息提示音
             • 音乐播放小部件：AppWidgetProvider，拉起媒体服务、弹出媒体播放通知、小部件获取通知刷新控件播放状态
             • 其他：CustomBottomSheetDialog底部弹出控件、本地音频媒体获取
-            """.trimIndent(), Intent(this, AudioActivity::class.java))
+            """.trimIndent(),
+//                Intent(this, AudioActivity::class.java)
+            routerPath = RouterPath.AUDIO
+            )
 
         )
     }
@@ -111,6 +128,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         installSplashScreen()
 
         super.onCreate(savedInstanceState)
+
+        "MainActivity.onCreate".logD()
 
         bodyBinding {
             val layoutManager = LinearLayoutManager(this@MainActivity)
@@ -122,9 +141,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         adapter.setOnItemClickListener { _, m, _ ->
-            m.intent?.let {
-                startActivity(it)
+            m.routerPath?.let {
+                TheRouter.build(it).navigation()
+            } ?: kotlin.run {
+                m.intent?.let {
+                    startActivity(it)
+                }
             }
+
         }
 
     }

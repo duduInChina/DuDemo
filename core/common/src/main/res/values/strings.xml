@@ -2,4 +2,11 @@
 <resources>
     <string name="app_name">DuDemo</string>
     <string name="log_tag_name">DuDemo</string>
+    <string name="weather_name">天气预报</string>
+    <string name="audio_name">音频</string>
+    <string name="album_name">相册</string>
+    <string name="download_name">下载</string>
+    <string name="log_name">日志</string>
+    <string name="router_name">路由</string>
+    <string name="video_name">视频</string>
 </resources>

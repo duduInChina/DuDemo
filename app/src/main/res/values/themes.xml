@@ -1,22 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme.  Theme.AppCompat.Light.NoActionBar 如app中使用到Material主键，需使用相关主题（否则出现 Failed to inflate ColorStateList 问题，或在控件@style也可以） -->
-    <style name="Theme.MyApplication" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item><!--    主颜色    -->
-        <item name="colorPrimaryVariant">@color/white_70</item><!--    比主颜色深色或浅色    -->
-        <item name="colorOnPrimary">@color/white</item><!--    主颜色的背景颜色    -->
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue</item><!--    次要颜色    -->
-        <item name="colorSecondaryVariant">@color/blue_70</item><!--    比次要深色或浅色    -->
-        <item name="colorOnSecondary">@color/black</item><!--    次要颜色的背景颜色    -->
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimary</item><!--    状态栏背景颜色    -->
-        <item name="android:windowLightStatusBar">true</item><!--    状态栏文字颜色黑色    -->
-        <!-- Customize your theme here. -->
-        <item name="android:windowBackground">?attr/colorOnPrimary</item><!--    全局默认背景颜色    -->
-        <item name="android:textColorPrimary">@color/textColorPrimary</item><!-- 主要文字颜色，如：toolbar 标题字体颜色   -->
-    </style>
-
 
     <!--  废弃，以往使用的启动画面方式  -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

@@ -19,6 +19,22 @@
 
 <img src="./images/common.gif" alt="weather" style="zoom:67%;" /> 
 
+### 模块化/组件化
+
+- TheRouter：适配Gradle 8，需配置Oracle版本Java 17，由于ViewBinding和KSP会发生丢失问题，当前使用KAPT
+
+  ​    Route：实现路由，跨模块调用
+
+  ​	ServiceProvider：依赖注入AOP能力
+
+  ​	FlowTask：业务节点初始化能力（每个进程只会调用一次该注解方法）
+
+  ​	ActivityManager：注入任务事件跨模块调度，如：EventBus、LiveData观察者模式
+
+- gradle.properties中配置moduleToApplication，子模块单独编译测试
+
+<img src="./images/router.jpg" alt="router" style="zoom:67%;" /> 
+
 ### 天气预报
 
 根据《第一行代码》Demo进行优化调整
