@@ -35,6 +35,14 @@
 
 <img src="./images/router.jpg" alt="router" style="zoom:67%;" /> 
 
+### 热修复
+
+- Tinker：可通过Gradle任务tinkerPatch做出diff分差文件，通过ClassLoader双亲委托机制反射修改Element集合加载顺序，需重启完成修复。当前不会加入到实际项目使用，由于minSdk需要23以下，且需要高度学习相关源码，必要时可进行自定义修改保证稳定性，需要自建补丁包分发平台，项目工时紧张情况下不考虑使用。
+
+- Spohix：DexFile解析下发dex补丁，遍历下面的class，反射获取类方法和注解方法，在Native层完成替换，根据修复与被修复两个方法内存地址（计算方法前后内存地址）复制覆盖处理，当前通过阿里EMAS平台完成，相对接入简单，不会受到minSdk影响，当前推荐接入方式。
+
+  <img src="./images/hotfix.jpg" alt="weather" style="zoom:67%;" /> 
+
 ### 天气预报
 
 根据《第一行代码》Demo进行优化调整

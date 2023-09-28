@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  默认cardView属性  -->
+    <style name="MyMainCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="contentPadding">15dp</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    <!--  默认cardView点击效果，默认点击拦截  -->
+    <style name="MyMainCardViewFocused" parent="MyMainCardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="rippleColor">@color/clickColorPrimary</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="MyItemCardViewFocused" parent="MyMainCardViewFocused">
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+    </style>
+
+
+</resources>

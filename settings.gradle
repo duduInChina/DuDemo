@@ -3,6 +3,8 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
     }
 }
 dependencyResolutionManagement {
@@ -15,6 +17,7 @@ dependencyResolutionManagement {
         // jcenter()
         maven { url "https://jitpack.io" }
         maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
     }
 }
 
@@ -40,3 +43,5 @@ include ':Video'
 include ':core:audio'
 include ':Audio'
 include ':Router'
+include ':Tinker'
+include ':AliSophix'

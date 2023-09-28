@@ -1,0 +1,284 @@
+/**
+ * 拆分tinker配置
+ */
+
+def bakPath = file("${buildDir}/bakApk/")
+// 主要配置项
+ext {
+    // 启用tinker配置
+    tinkerEnable = false
+
+    // 原始包用于生成差异
+    tinkerOldApkPath = "${bakPath}/Tinker-debug-0926-16-45-23.apk"
+
+    // 混淆文件处理，保持旧apk的proguard混淆方式，从而减少补丁包的大小。这个只是推荐设置，不设置applyMapping也不会影响任何的assemble编译
+    tinkerApplyMappingPath = ""
+    //tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
+
+    // 通过旧apk的R.txt文件保持ResId的分配，这样不仅可以减少补丁包的大小，同时也避免由于ResId改变导致remote view异常。
+    tinkerApplyResourcePath = ""
+    //tinkerApplyResourcePath = "${bakPath}/app-debug-0424-15-02-56-R.txt"
+
+    // 多渠道情况下，自动根据路径拼接;运行tinkerPatchAllFlavorDebug或者tinkerPatchAllFlavorRelease即可得到所有flavor的补丁包
+    tinkerBuildFlavorDirectory = "${bakPath}/app-1018-17-32-47"
+}
+
+def getTinkerEnableForExt(){
+    return ext.tinkerEnable
+}
+
+def getOldApkPath(){
+    return ext.tinkerOldApkPath
+}
+
+def getTinkerApplyMappingPath(){
+    return ext.tinkerApplyMappingPath
+}
+
+def getTinkerApplyResourcePath(){
+    return ext.tinkerApplyResourcePath
+}
+
+def getTinkerBuildFlavorDirectory(){
+    return ext.tinkerBuildFlavorDirectory
+}
+
+// 获取tinkerId
+def gitSha() {
+    try {
+        // 如：312d839
+        String gitRev = 'git rev-parse --short HEAD'.execute(null, project.rootDir).text.trim()
+        if (gitRev == null) {
+            throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
+        }
+        return gitRev
+    } catch (Exception e) {
+        throw new GradleException("can't get git rev, you should add git to system path or just input test value, such as 'testTinkerId'")
+    }
+}
+
+// tinker各项配置
+if(getTinkerEnableForExt()){
+    apply plugin: 'com.tencent.tinker.patch'
+
+    tinkerPatch {
+
+        tinkerEnable = getTinkerEnableForExt()
+
+        oldApk = getOldApkPath()
+
+        /**
+         * 是否忽略警告继续编译，false出现警告中断编译
+         */
+        ignoreWarning = false
+
+        /**
+         * 报错解决：Warning:ignoreWarning is false,
+         * but we found loader classes are found in old secondary dex
+         */
+        allowLoaderInAnyDex = true
+        removeLoaderForAllDex = true
+
+        /**
+         * 在运行过程中，我们需要验证基准apk包与补丁包的签名是否一致
+         */
+        useSign = true
+
+        /**
+         * 配置项
+         */
+        buildConfig{
+
+            /**
+             * 必填项
+             * 我们需要验证基准apk包的tinkerId是否等于补丁包的tinkerId。
+             * 这个是决定补丁包能运行在哪些基准包上面，
+             * 一般来说我们可以使用git版本号、versionName等等
+             * 补丁包是根据tinkerId匹配基准包的
+             */
+            tinkerId = gitSha()
+
+            applyMapping = getTinkerApplyMappingPath()
+
+            applyResourceMapping = getTinkerApplyResourcePath()
+
+            /**
+             *  如果我们有多个dex,编译补丁时可能会由于类的移动导致变更增多。若打开keepDexApply模式，补丁包将根据基准包的类分布来编译。
+             */
+            keepDexApply = false
+
+            /**
+             * 是否使用加固模式，仅仅将变更的类合成补丁。注意，这种模式仅仅可以用于加固应用中。
+             * 如果此属性为true，生成的补丁包将包含一个索引包括所有更改的类
+             */
+            isProtectedApp = false
+
+            /**
+             * tinker是否应该支持组件热插拔(动态添加新组件)。
+             * 如果此属性为true，新apk中添加的组件将在之后可用
+             * patch加载成功。否则，在生成补丁时将宣布错误
+             * 在编译时。
+             * <b>请注意，目前这个功能是孵化的，只支持非导出的活动</b>
+             * 是否支持新增非export的Activity
+             */
+            supportHotplugComponent = false
+
+        }
+
+        dex {
+            /**
+             * 只能是'raw'或者'jar'。
+             * 对于'raw'模式，我们将会保持输入dex的格式。
+             * 对于'jar'模式，我们将会把输入dex重新压缩封装到jar。如果你的minSdkVersion小于14，你必须选择‘jar’模式，而且它更省存储空间，但是验证md5时比'raw'模式耗时。默认我们并不会去校验md5,一般情况下选择jar模式即可。
+             */
+            dexMode = "jar"
+
+            /**
+             * 需要处理dex路径，支持*、?通配符，必须使用'/'分割。路径是相对安装包的，例如assets/...
+             */
+            pattern = ["classes*.dex", "assets/secondary-dex-?.jar"]
+
+            /**
+             * 这一项非常重要，它定义了哪些类在加载补丁包的时候会用到。这些类是通过Tinker无法修改的类，也是一定要放在main dex的类。
+             * 这里需要定义的类有：
+             * 1. 你自己定义的Application类；
+             * 2. Tinker库中用于加载补丁包的部分类，即com.tencent.tinker.loader.*；
+             * 3. 如果你自定义了TinkerLoader，需要将它以及它引用的所有类也加入loader中；
+             * 4. 其他一些你不希望被更改的类，例如Sample中的BaseBuildInfo类。这里需要注意的是，这些类的直接引用类也需要加入到loader中。或者你需要将这个类变成非preverify。
+             * 5. 使用1.7.6版本之后的gradle版本，参数1、2会自动填写。若使用newApk或者命令行版本编译，1、2依然需要手动填写
+             */
+            //loader = ["tinker.sample.android.app.BaseBuildInfo"]
+        }
+
+        // lib处理的配置，当前不考虑so热更
+//    lib {
+//        /**
+//         * 需要处理res路径，支持*、?通配符，必须使用'/'分割。与dex.pattern一致, 路径是相对安装包的，例如assets/...，务必注意的是，只有满足pattern的资源才会放到合成后的资源包。
+//         */
+//        pattern = ["lib/*/*.so"]
+//    }
+
+        // res处理配置，当前不考虑资源热更
+//    res {
+//        /**
+//         * 需要处理res路径，支持*、?通配符，必须使用'/'分割。与dex.pattern一致, 路径是相对安装包的，例如assets/...，务必注意的是，只有满足pattern的资源才会放到合成后的资源包。
+//         */
+//        pattern = ["res/*", "assets/*", "resources.arsc", "AndroidManifest.xml"]
+//
+//        /**
+//         * 在编译时会忽略该文件的新增、删除与修改。 最极端的情况，ignoreChange与上面的pattern一致，即会完全忽略所有资源的修改。
+//         */
+//        ignoreChange = ["assets/sample_meta.txt"]
+//
+//        /**
+//         * 对于修改的资源，如果大于largeModSize，我们将使用bsdiff算法。这可以降低补丁包的大小，但是会增加合成时的复杂度。默认大小为100kb
+//         */
+//        largeModSize = 100
+//
+//    }
+
+        /**
+         *  默认我们自动从基准安装包与新安装包的Manifest中读取tinkerId,并自动写入configField。
+         *  在这里，你可以定义其他的信息，
+         *  在运行时可以通过TinkerLoadResult.getPackageConfigByName得到相应的数值。
+         *  但是建议直接通过修改代码来实现，例如BuildConfig。
+         */
+//    packageConfig {
+//        configField("patchMessage", "tinker is sample to use")
+//    }
+
+        sevenZip {
+            /**
+             * 将自动根据机器属性获得对应的7za运行文件，推荐使用
+             */
+            zipArtifact = "com.tencent.mm:SevenZip:1.1.10"
+        }
+
+
+    }
+
+    // 获取当前多渠道情况
+    List<String> flavors = new ArrayList<>();
+    project.android.productFlavors.each { flavor ->
+        flavors.add(flavor.name)
+    }
+    boolean hasFlavors = flavors.size() > 0
+    def date = new Date().format("MMdd-HH-mm-ss")
+
+    /**
+     * bak apk and mapping
+     * android.applicationVariants.all 方法用于遍历所有的 Android 应用程序变体，并获取每个变体的名称。通过调用 variant.name 方法，可以获取当前 Android 应用程序变体的名称。
+     */
+    android.applicationVariants.all { variant ->
+        /**
+         * task type, you want to bak
+         */
+        def taskName = variant.name
+
+        tasks.all {
+            // 执行的任务是否 assemble开头的任务，用于将构建输出文件备份到指定目录。
+            if ("assemble${taskName.capitalize()}".equalsIgnoreCase(it.name)) {
+                // 这个任务执行后添加下面任务
+                it.doLast {
+                    copy {
+                        def fileNamePrefix = "${project.name}-${variant.baseName}"
+                        def newFileNamePrefix = hasFlavors ? "${fileNamePrefix}" : "${fileNamePrefix}-${date}"
+
+                        def destPath = hasFlavors ? file("${bakPath}/${project.name}-${date}/${variant.flavorName}") : bakPath
+
+                        if (variant.metaClass.hasProperty(variant, 'packageApplicationProvider')) {
+//                        def packageAndroidArtifact = variant.packageApplicationProvider.get()
+//                        if (packageAndroidArtifact != null) {
+//                            try {
+//                                from new File(packageAndroidArtifact.outputDirectory.getAsFile().get(), variant.outputs.first().apkData.outputFileName)
+//                            } catch (Exception e) {
+//                                from new File(packageAndroidArtifact.outputDirectory, variant.outputs.first().apkData.outputFileName)
+//                            }
+//                        } else {
+//                            from variant.outputs.first().mainOutputFile.outputFile
+//                        }
+                            def packageAndroidArtifact = variant.packageApplicationProvider.get()
+                            if (packageAndroidArtifact != null) {
+                                try {
+                                    from new File(packageAndroidArtifact.outputDirectory.getAsFile().get(), variant.outputs.first().variantOutput.outputFileName.get())
+                                } catch (Exception e) {
+                                    from new File(packageAndroidArtifact.outputDirectory, variant.outputs.first().variantOutput.outputFileName.get())
+                                }
+                            } else {
+                                from variant.outputs.first().mainOutputFile.outputFile
+                            }
+                        } else {
+                            from variant.outputs.first().outputFile
+                        }
+
+                        into destPath
+                        rename { String fileName ->
+                            fileName.replace("${fileNamePrefix}.apk", "${newFileNamePrefix}.apk")
+                        }
+
+                        def dirName = variant.dirName
+                        if (hasFlavors) {
+                            dirName = taskName
+                        }
+                        from "${buildDir}/outputs/mapping/${dirName}/mapping.txt"
+                        into destPath
+                        rename { String fileName ->
+                            fileName.replace("mapping.txt", "${newFileNamePrefix}-mapping.txt")
+                        }
+
+                        from "${buildDir}/intermediates/symbols/${dirName}/R.txt"
+                        from "${buildDir}/intermediates/symbol_list/${dirName}/R.txt"
+                        from "${buildDir}/intermediates/runtime_symbol_list/${dirName}/R.txt"
+                        into destPath
+                        rename { String fileName ->
+                            fileName.replace("R.txt", "${newFileNamePrefix}-R.txt")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+

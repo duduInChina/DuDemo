@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../dependencies.gradle'
+apply from: 'tinker.gradle' // 引入tinker配置
+android {
+    namespace 'com.dudu.tinker'
+    compileSdk 33
+
+    defaultConfig {
+        // 当前Tinker仅支持23（6.0）以下，不然出现编译补丁包时出现异常
+        minSdk 21
+        targetSdk 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        multiDexEnabled true
+        multiDexKeepProguard file("tinker_multidexkeep.pro")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    viewBinding {
+        enabled = true
+    }
+    //
+    dexOptions {
+        jumboMode = true
+    }
+}
+
+dependencies {
+
+    // dex分包，application热修复需使用到dex分包配置multidex
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    // 核心库
+    implementation("com.tencent.tinker:tinker-android-lib:${TinkerVersion}") { changing = true }
+
+    // Maven local cannot handle transist dependencies.
+    implementation("com.tencent.tinker:tinker-android-loader:${TinkerVersion}") { changing = true }
+
+    // annotationProcessor注解处理器，compileOnly仅在编译时可见，tinker-android-anno 生成application
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TinkerVersion}") { changing = true }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TinkerVersion}") { changing = true }
+    compileOnly("com.tencent.tinker:tinker-android-anno-support:${TinkerVersion}") { changing = true }
+
+}
+
+
+
