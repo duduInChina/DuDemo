@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  sdk 33，之前是还是本机图片获取读取权限    -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--  sdk 33，后独立区分  -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+
+    <application>
+        <activity android:name=".AlbumActivity"/>
+    </application>
+
+</manifest>

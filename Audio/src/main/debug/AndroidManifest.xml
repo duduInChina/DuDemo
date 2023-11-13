@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/audio_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.MyApplication">
+
+        <activity android:name="com.dudu.audio.AudioActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!--    小部件声明    -->
+        <receiver
+            android:name="com.dudu.audio.AudioWidget"
+            android:exported="true">
+            <intent-filter>
+                <!--      系统小部件更新广播          -->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <!--      应用内部小部件更新广播          -->
+                <action android:name="${audioWidgetUpdateReceiverAction}"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info" />
+        </receiver>
+
+    </application>
+
+</manifest>

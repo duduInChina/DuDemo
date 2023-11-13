@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  通知栏前台service  -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!--  getContext().packageManager.canRequestPackageInstalls() app是否有安装权限  -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+
+    <application>
+
+        <service android:name=".DownloadService"/>
+
+<!--
+authorities 是标记我们这个ContentProvider的唯一标识，是一个用于认证的暗号，我们一般默认使用包名+fileprovider来定义。（能不能使用别的，可以，abcd都行，但是没必要）
+name 是具体的FileProvider类，如果是系统的，就用上面的这种，如果是自定义的，就写自定义FileProvider的全类名。
+exported 是否限制其他应用获取此FileProvider。
+grantUriPermissions 是否授权其他应用获取访问Uri权限，一般为true。 ${applicationId}${downloadAuthoritiesSuffix}
+meta-data 和下面的 name 都是固定的写法，重点是 resource 需要自己实现规则，定义哪些私有文件会被提供访问。-->
+        <provider
+            android:authorities="${applicationId}${downloadAuthoritiesSuffix}"
+            android:name=".DownloadFileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/download_file_paths"/>
+
+        </provider>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  启用前台通知服务  -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!--  sdk 33，之前是还是获取读取权限  -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!--  sdk 33，需要获取独立的音频权限才可获得本机音频数据，照片、视频同理 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+
+    <!--  通知栏前台service  -->
+    <application>
+
+        <!--  exported: 不允许其他应用调用      -->
+        <!--  设置适当的 foregroundServiceType，你可以帮助系统更好地管理服务的优先级和资源分配，从而提高系统性能和用户体验。
+                none: 表示服务不会被分类为任何特定类型，系统将根据默认策略进行管理。
+                connectedDevice: 表示服务与一个或多个外部设备（例如蓝牙设备）连接，并且对这些设备的连接状态敏感。这可以用于指示服务与设备之间的交互。
+                mediaPlayback: 表示服务正在执行与媒体播放相关的操作，如音乐播放。这可以确保在资源受限的情况下优先考虑保持音频播放的流畅性。
+                mediaProjection: 表示服务在执行屏幕捕获或录制等操作，这在屏幕录制应用中可能会使用到
+        -->
+        <service
+            android:name=".AudioService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="true">
+
+            <intent-filter>
+                <!--   关联启动的意图，Intent可根据下面意图进行启动             -->
+                <action android:name="androidx.media3.session.MediaLibraryService"/>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+
+        </service>
+
+    </application>
+
+
+
+</manifest>

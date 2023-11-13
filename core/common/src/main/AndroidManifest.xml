@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="com.dudu.common"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- 获取sd卡写的权限，用于文件上传和下载，当针对Android 13+时，WRITE_EXTERNAL_STORAGE已弃用(并且不授予)。如果需要写入共享存储，请使用MediaStore。createWriteRequest意图。 -->
+    <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+
+    <!-- 拥有sd卡读写权 Google Play 对该权限有限制策略  -->
+    <!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage"-->
+
+    <application>
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="com.dudu.common.initializer.CommonInitializer"
+                android:value="androidx.startup" />
+        </provider>
+    </application>
+
+</manifest>

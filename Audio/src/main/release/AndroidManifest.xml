@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <activity android:name="com.dudu.audio.AudioActivity" />
+
+        <!--    小部件声明    -->
+        <receiver
+            android:name="com.dudu.audio.AudioWidget"
+            android:exported="true">
+            <intent-filter>
+                <!--      系统小部件更新广播          -->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <!--      应用内部小部件更新广播          -->
+                <action android:name="${audioWidgetUpdateReceiverAction}"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/appwidget_provider_info" />
+        </receiver>
+
+    </application>
+
+</manifest>

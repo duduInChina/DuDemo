@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  打开请求权限，显示在其他应用上层，app在该列表页，声明  -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/video_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.MyApplication"
+        android:usesCleartextTraffic="true">
+        <!--    configChanges：指定当特定的配置更改发生时，Activity 是否应该处理这些更改而不是重新创建自身-->
+        <activity android:name=".VideoActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".list.VideoListActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".pager.VideoPagerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>

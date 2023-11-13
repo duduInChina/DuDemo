@@ -9,3 +9,5 @@
 
 # Keystore files
 *.jks
+
+!AndroidManifest.xml

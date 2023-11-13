@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- allowBackup 是否允许应用程序参与备份和恢复基础设施。 -->
+    <!-- dataExtractionRules fullBackupContent 参与备份的数据   -->
+    <!-- supportsRtl 表明app是否支持从右往左的布局，如果把这个属性默认是false，
+        那么app在任何情况下都不会出现从右往左的布局。如果把这个属性默认是true，
+        并且targetSdkVersion设置为17或更高时，那么当手机在诸如阿拉伯语、希伯来语等环境中，
+        会自动修改为从右往左的布局。其实我就是android:supportsRtl=“false”解决了从右往左的问题。
+    -->
+    <!-- usesCleartextTraffic 运行http明文传输   -->
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication"
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true" >
+
+        <!-- exported 是否允许其他应该应用调用 -->
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting"><!-- 启动画面 Android 12 API -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+    </application>
+
+
+
+</manifest>
